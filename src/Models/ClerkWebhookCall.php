@@ -18,7 +18,7 @@ class ClerkWebhookCall extends WebhookCall
 
     public function eventName(): string
     {
-        return $this->payload('event') ?? 'unknown';
+        return $this->payload('type') ?? 'unknown';
     }
 
     public function payload(string $key = null): mixed

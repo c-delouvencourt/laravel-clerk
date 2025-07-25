@@ -3,6 +3,7 @@
 namespace CLDT\Clerk;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Str;
 use Spatie\WebhookClient\SignatureValidator\SignatureValidator;
 use Spatie\WebhookClient\WebhookConfig;
@@ -17,8 +18,6 @@ class ClerkWebhookSignatureValidator implements SignatureValidator
         }
 
         $payload = $request->getPayload();
-
-        $payload = '{"test": 2432232314}';
         $header = array(
             'webhook-id'  => $request->header('webhook-id'),
             'webhook-timestamp' => $request->header('webhook-timestamp'),
@@ -30,6 +29,7 @@ class ClerkWebhookSignatureValidator implements SignatureValidator
             $wh->verify($payload, $header);
             return true;
         } catch (WebhookVerificationException $e) {
+            Log::error($e->getMessage());
             return false;
         }
     }

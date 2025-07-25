@@ -1,0 +1,70 @@
+{
+    "name": "cldt/laravel-clerk",
+    "version": "0.0.1",
+    "description": "API Wrapper for the Clerk API and Clerk Webhooks for Laravel",
+    "keywords": [
+        "cldt",
+        "clerk php",
+        "clerk webhooks",
+        "clerk",
+        "laravel-clerk-webhooks"
+    ],
+    "homepage": "https://github.com/cdelouvencourt/laravel-clerk",
+    "license": "MIT",
+    "type": "library",
+    "authors": [
+        {
+            "name": "Clément de Louvencourt",
+            "email": "clement@meilleursbiens.com",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": "^8.0",
+        "illuminate/contracts": "^8.77|^9.0|^10.0|^11.0|^12.0",
+        "spatie/laravel-package-tools": "^1.9.0",
+        "spatie/laravel-webhook-client": "^3.1.0",
+        "svix/svix": "^1.69"
+    },
+    "require-dev": {
+        "nunomaduro/collision": "^5.5|^6.0|^7.0|^8.0",
+        "orchestra/testbench": "^6.24|^7.0|^8.0|^9.0",
+        "pestphp/pest": "^1.21|^2.34",
+        "spatie/laravel-ray": "^1.29",
+        "spatie/pest-plugin-test-time": "^1.0|^2.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "CLDT\\Clerk\\": "src",
+            "CLDT\\Clerk\\Database\\Factories\\": "database/factories"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "CLDT\\Clerk\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "psalm": "vendor/bin/psalm",
+        "test": "./vendor/bin/testbench package:test --parallel --no-coverage",
+        "test-coverage": "vendor/bin/phpunit --coverage-html coverage"
+    },
+    "config": {
+        "sort-packages": true,
+        "allow-plugins": {
+            "pestphp/pest-plugin": true
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "CLDT\\Clerk\\ClerkServiceProvider"
+            ],
+            "aliases": {
+                "Clerk": "CLDT\\Clerk\\ClerkFacade"
+            }
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true
+}

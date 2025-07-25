@@ -86,8 +86,7 @@ class ClerkApiResponse
         $array = [
             'statusCode' => $this->statusCode,
             'hasError' => $this->hasError,
-            'message' => $this->message,
-            'verbose' => $this->verbose,
+            'message' => $this->messages,
             'data' => $this->data
         ];
 

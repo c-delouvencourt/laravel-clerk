@@ -7,7 +7,7 @@ class ClerkApiResponse
 
     protected int $statusCode = 200;
     protected bool $hasError = false;
-    protected array $messages;
+    protected array $messages = [];
 
     protected array $data;
 

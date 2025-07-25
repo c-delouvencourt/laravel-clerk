@@ -26,7 +26,7 @@ class Clerk
         $this->client = Http::withHeaders([
             'Accept' => 'application/json',
             'Content-Type' => 'application/json',
-            'Bearer' => config('clerk.api_key'),
+            'Bearer' => 'Bearer ' . config('clerk.api_key'),
         ])->baseUrl(config('clerk.endpoint'));
     }
 

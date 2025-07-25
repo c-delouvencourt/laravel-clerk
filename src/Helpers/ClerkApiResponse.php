@@ -7,8 +7,7 @@ class ClerkApiResponse
 
     protected int $statusCode = 200;
     protected bool $hasError = false;
-    protected string $message;
-    protected string $verbose;
+    protected array $messages;
 
     protected array $data;
 
@@ -16,17 +15,16 @@ class ClerkApiResponse
     {
         if ($statusCode < 200 || $statusCode >= 300) {
             $this->hasError = true;
-            $this->message = $response['error'] ?? 'Unknown error';
-            $this->verbose = $response['verbose'] ?? 'Unknown error';
+            $this->messages = $response['errors'] ?? 'Unknown error';
             $this->statusCode = $statusCode;
             $this->data = [];
             return;
         }
-        if(!isset($dataKey)) {
+        if (!isset($dataKey)) {
             $this->data = $response;
             return;
         }
-        if(!isset($response[$dataKey])) {
+        if (!isset($response[$dataKey])) {
             $this->data = [];
             return;
         }
@@ -38,14 +36,19 @@ class ClerkApiResponse
         return $this->hasError;
     }
 
-    public function getVerbose(): string
+    public function getMessage(): array
     {
-        return $this->verbose;
+        return $this->messages;
     }
 
-    public function getMessage(): string
+    public function getFirstMessage(): string
     {
-        return $this->message;
+        return $this->messages[0]['message'] ?? "Unknown error";
+    }
+
+    public function getLastMessage(): string
+    {
+        return end($this->messages)['message'] ?? "Unknown error";
     }
 
     public function getStatusCode(): int
@@ -91,7 +94,8 @@ class ClerkApiResponse
         return $array;
     }
 
-    public function toString(): string{
+    public function toString(): string
+    {
         return json_encode($this->data);
     }
 
